@@ -48,16 +48,6 @@ export default function Home() {
         }
       );
 
-      // Pin SVH logo during timeline scroll
-      gsap.to('#svhLogoPin', {
-        scrollTrigger: {
-          trigger: '#process-flow',
-          start: 'top top',
-          end: 'bottom top',
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
     });
 
     return () => ctx.revert();
@@ -125,46 +115,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Banner Section */}
-      <section className="my-8">
-        <img src={erasebg} alt="Banner" className="w-full object-cover" />
-      </section>
-
-      {/* Main Split Flow & Stats Section */}
-      <section id="process-flow" className="py-16 px-4 lg:px-8 max-w-[1400px] mx-auto bg-white border-t border-gray-100">
-
-        <div className="flex flex-col xl:flex-row gap-12">
-
-          {/* Left Column: Process Flow (Rebuilt from scratch to match detailed vertically aligned timeline block) */}
-          <div className="flex-1" ref={flowRef}>
-            <h2 className="text-3xl font-black font-inter text-sih-orange uppercase tracking-tight mb-10">
-              SVH PROCESS FLOW AND TIMELINE
-            </h2>
-
-            <div className="relative border-l-4 border-[#0ea5e9] ml-8 space-y-12 pb-8">
-              {steps.map((step, idx) => (
-                <div key={idx} className="relative pl-10 pr-4">
-                  {/* Circle Node */}
-                  <div className="absolute -left-[18px] top-1 w-8 h-8 rounded-full bg-sih-navy border-4 border-white flex items-center justify-center shadow-md">
-                    <div className="w-2 h-2 bg-sih-orange rounded-full"></div>
+        <section id="process-flow" className="py-16 px-4 lg:px-8 max-w-[1400px] mx-auto bg-white border-t border-gray-100">
+          <div className="flex flex-col xl:flex-row gap-12">
+            {/* Left: Timeline */}
+            <div className="flex-1" ref={flowRef}>
+              <h2 className="text-3xl font-black font-inter text-sih-orange uppercase tracking-tight mb-10">
+                SVH PROCESS FLOW AND TIMELINE
+              </h2>
+              <div className="relative border-l-4 border-[#0ea5e9] ml-8 space-y-12 pb-8">
+                {steps.map((step, idx) => (
+                  <div key={idx} className="relative pl-10 pr-4">
+                    {/* Circle Node */}
+                    <div className="absolute -left-[18px] top-1 w-8 h-8 rounded-full bg-sih-navy border-4 border-white flex items-center justify-center shadow-md">
+                      <div className="w-2 h-2 bg-sih-orange rounded-full" />
+                    </div>
+                    {/* Content */}
+                    <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                      <span className="inline-block px-3 py-1 bg-[#fce4c0] text-[#0f2942] text-xs font-bold uppercase tracking-wider rounded-full mb-3">
+                        {step.date}
+                      </span>
+                      <h3 className="text-xl font-bold font-inter text-[#0f2942] mb-3">
+                        {step.title}
+                      </h3>
+                      <p className="text-gray-600 font-roboto text-sm leading-relaxed text-justify">
+                        {step.desc}
+                      </p>
+                    </div>
                   </div>
-
-                  {/* Content */}
-                  <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                    <span className="inline-block px-3 py-1 bg-[#fce4c0] text-[#0f2942] text-xs font-bold uppercase tracking-wider rounded-full mb-3">
-                      {step.date}
-                    </span>
-                    <h3 className="text-xl font-bold font-inter text-[#0f2942] mb-3">{step.title}</h3>
-                    <p className="text-gray-600 font-roboto text-sm leading-relaxed text-justify">
-                      {step.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+            {/* Right: Banner */}
+             <div className="w-48 flex-shrink-0 mt-10 xl:mt-0">
+               <img src={erasebg} alt="Banner" className="sticky top-20 w-full h-auto object-contain max-h-[60vh]" />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <Metrics />
       <Organizers />
