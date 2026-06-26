@@ -9,8 +9,8 @@ import erasebg from '../assets/erasebg-transformed.png';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const introRef = useRef<HTMLDivElement>(null);
-  const flowRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef(null);
+  const flowRef = useRef(null);
 
   useEffect(() => {
     // GSAP Scroll Animations

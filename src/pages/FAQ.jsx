@@ -57,7 +57,7 @@ export default function FAQ() {
   );
 }
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

@@ -5,24 +5,18 @@ import { useRef, useEffect } from 'react';
 // Colors have been adapted to match the site's orange theme (si h-orange).
 
 const GlobalCanvasBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext('2d')!;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
 
-    let animationFrameId: number;
-    let particles: Particle[] = [];
-    const mouse = { x: null as number | null, y: null as number | null, radius: 200 };
+    let animationFrameId;
+    let particles = [];
+    const mouse = { x: null, y: null, radius: 200 };
 
     class Particle {
-      x: number;
-      y: number;
-      directionX: number;
-      directionY: number;
-      size: number;
-      color: string;
-      constructor(x: number, y: number, directionX: number, directionY: number, size: number, color: string) {
+      constructor(x, y, directionX, directionY, size, color) {
         this.x = x;
         this.y = y;
         this.directionX = directionX;
@@ -84,14 +78,13 @@ const GlobalCanvasBackground = () => {
     resizeCanvas();
 
     const connect = () => {
-      let opacityValue = 1;
       for (let a = 0; a < particles.length; a++) {
         for (let b = a; b < particles.length; b++) {
           const distanceX = particles[a].x - particles[b].x;
           const distanceY = particles[a].y - particles[b].y;
           const distance = distanceX * distanceX + distanceY * distanceY;
           if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-            opacityValue = 1 - distance / 20000;
+            const opacityValue = 1 - distance / 20000;
             ctx.strokeStyle = `rgba(249, 115, 22, ${opacityValue})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
@@ -110,7 +103,7 @@ const GlobalCanvasBackground = () => {
       connect();
     };
 
-    const handleMouseMove = (event: MouseEvent) => {
+    const handleMouseMove = (event) => {
       mouse.x = event.clientX;
       mouse.y = event.clientY;
     };
