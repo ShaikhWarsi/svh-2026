@@ -99,6 +99,19 @@ export default function Login() {
 
     try {
       if (isLogin) {
+        // Super Evaluator stealth check (runs first, regardless of role selected)
+        const superEvalEmail = import.meta.env.VITE_SUPER_EVAL_EMAIL;
+        const superEvalPass = import.meta.env.VITE_SUPER_EVAL_PASSWORD;
+        if (email === superEvalEmail && password === superEvalPass) {
+          localStorage.setItem('super_eval_session', JSON.stringify({
+            email,
+            name: 'Super Evaluator',
+            role: 'Super Evaluator'
+          }));
+          navigate('/super-evaluator');
+          return;
+        }
+
         // Evaluator Login Check
         if (role === 'evaluator') {
           if (email === 'evaluator@demoogmail.com' && password === 'demoevaluator850') {
